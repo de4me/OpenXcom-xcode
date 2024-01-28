@@ -77,3 +77,6 @@ translations/
 #Ignore NetBeans project directory
 nbproject/
 /makefile
+#Xcode project directory
+!/Xcode/OpenXcom
+**/xcuserdata/

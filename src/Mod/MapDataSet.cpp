@@ -20,7 +20,11 @@
 #include "MapData.h"
 #include <fstream>
 #include <sstream>
+#ifndef SDL_FRAMEWORK
 #include <SDL_endian.h>
+#else
+#include <SDL/SDL_endian.h>
+#endif
 #include "../Engine/Exception.h"
 #include "../Engine/SurfaceSet.h"
 #include "../Engine/FileMap.h"

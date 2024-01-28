@@ -18,7 +18,11 @@
  */
 #include "VideoState.h"
 #include <algorithm>
+#ifndef SDL_FRAMEWORK
 #include <SDL_mixer.h>
+#else
+#include <SDL_mixer/SDL_mixer.h>
+#endif
 #include "../Engine/Adlib/adlplayer.h"
 #include "../Engine/Logger.h"
 #include "../Engine/Game.h"

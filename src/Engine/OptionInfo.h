@@ -20,7 +20,11 @@
 #include <yaml-cpp/yaml.h>
 #include <string>
 #include <map>
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 
 namespace OpenXcom
 {

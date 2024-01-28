@@ -21,7 +21,11 @@
 #include <vector>
 #include <utility>
 #include <string>
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include <yaml-cpp/yaml.h>
 #include "Unicode.h"
 

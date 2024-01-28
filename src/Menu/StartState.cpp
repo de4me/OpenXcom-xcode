@@ -35,8 +35,13 @@
 #include "../Interface/Text.h"
 #include "MainMenuState.h"
 #include "CutsceneState.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL_mixer.h>
 #include <SDL_thread.h>
+#else
+#include <SDL_mixer/SDL_mixer.h>
+#include <SDL/SDL_thread.h>
+#endif
 
 namespace OpenXcom
 {

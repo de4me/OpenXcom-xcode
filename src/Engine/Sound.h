@@ -17,7 +17,11 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef SDL_FRAMEWORK
 #include <SDL_mixer.h>
+#else
+#include <SDL_mixer/SDL_mixer.h>
+#endif
 #include <string>
 
 namespace OpenXcom

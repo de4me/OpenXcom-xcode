@@ -19,9 +19,15 @@
 
 #include "Options.h"
 #include "../version.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
 #include <SDL_keysym.h>
 #include <SDL_mixer.h>
+#else
+#include <SDL/SDL.h>
+#include <SDL/SDL_keysym.h>
+#include <SDL_mixer/SDL_mixer.h>
+#endif
 #include <stdio.h>
 #include <iostream>
 #include <map>

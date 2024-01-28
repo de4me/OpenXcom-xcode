@@ -19,7 +19,11 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
+#ifndef SDL_FRAMEWORK
 #include <SDL_gfxPrimitives.h>
+#else
+#include <SDL_gfx/SDL_gfxPrimitives.h>
+#endif
 #include "Map.h"
 #include "Camera.h"
 #include "BattlescapeState.h"

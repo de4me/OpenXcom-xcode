@@ -20,7 +20,11 @@
 #include <map>
 #include <vector>
 #include <string>
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include <yaml-cpp/yaml.h>
 #include "../Engine/Options.h"
 #include "../Savegame/GameTime.h"

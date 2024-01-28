@@ -17,7 +17,11 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "OptionsAudioState.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL_mixer.h>
+#else
+#include <SDL_mixer/SDL_mixer.h>
+#endif
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"

@@ -21,7 +21,11 @@
 #include <algorithm>
 #include <cmath>
 #include <sstream>
+#ifndef SDL_FRAMEWORK
 #include <SDL_mixer.h>
+#else
+#include <SDL_mixer/SDL_mixer.h>
+#endif
 #include "State.h"
 #include "Screen.h"
 #include "Sound.h"

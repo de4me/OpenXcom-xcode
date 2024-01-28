@@ -19,7 +19,11 @@
  */
 #include <string>
 #include <stdint.h>
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 
 namespace OpenXcom
 {

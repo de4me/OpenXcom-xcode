@@ -20,7 +20,11 @@
 #include <climits>
 #include <set>
 #include "TileEngine.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include "AIModule.h"
 #include "Map.h"
 #include "Camera.h"

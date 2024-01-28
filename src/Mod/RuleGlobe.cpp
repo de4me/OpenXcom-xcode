@@ -17,7 +17,11 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "RuleGlobe.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL_endian.h>
+#else
+#include <SDL/SDL_endian.h>
+#endif
 #include <fstream>
 #include "../Engine/Exception.h"
 #include "Polygon.h"

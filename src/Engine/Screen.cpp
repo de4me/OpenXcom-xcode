@@ -33,7 +33,11 @@
 #include "FileMap.h"
 #include "Zoom.h"
 #include "Timer.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 
 namespace OpenXcom
 {

@@ -19,7 +19,11 @@
  */
 #include <string>
 #include <vector>
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include <yaml-cpp/yaml.h>
 #include "../Mod/MCDPatch.h"
 

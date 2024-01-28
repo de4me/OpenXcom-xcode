@@ -18,7 +18,11 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../Engine/State.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include <string>
 #include "OptionsBaseState.h"
 #include "../Savegame/SavedGame.h"

@@ -18,7 +18,11 @@
  */
 #include "Cursor.h"
 #include <cmath>
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include "../Engine/Action.h"
 
 namespace OpenXcom

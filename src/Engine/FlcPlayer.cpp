@@ -29,7 +29,11 @@
 #include <algorithm>
 #include <cassert>
 #include <string.h>
+#ifndef SDL_FRAMEWORK
 #include <SDL_mixer.h>
+#else
+#include <SDL_mixer/SDL_mixer.h>
+#endif
 #include <fstream>
 #include "Logger.h"
 #include "Screen.h"

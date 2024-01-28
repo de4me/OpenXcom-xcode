@@ -21,9 +21,15 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#ifndef SDL_FRAMEWORK
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
 #include <SDL_endian.h>
+#else
+#include <SDL_gfx/SDL_gfxPrimitives.h>
+#include <SDL_image/SDL_image.h>
+#include <SDL/SDL_endian.h>
+#endif
 #include "../lodepng.h"
 #include "Palette.h"
 #include "Exception.h"

@@ -15,7 +15,11 @@
 #define GL_SILENCE_DEPRECATION
 #endif
 
+#ifndef SDL_FRAMEWORK
 #include <SDL_opengl.h>
+#else
+#include <SDL/SDL_opengl.h>
+#endif
 #include <string>
 
 namespace OpenXcom

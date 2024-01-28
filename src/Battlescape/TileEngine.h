@@ -21,7 +21,11 @@
 #include "Position.h"
 #include "../Mod/RuleItem.h"
 #include "../Mod/MapData.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 
 namespace OpenXcom
 {

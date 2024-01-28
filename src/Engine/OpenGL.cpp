@@ -11,7 +11,11 @@
 #ifndef __NO_OPENGL
 
 #include "OpenGL.h"
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include <yaml-cpp/yaml.h>
 #include <fstream>
 

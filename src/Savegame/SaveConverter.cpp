@@ -18,7 +18,11 @@
  */
 #include "SaveConverter.h"
 #include <yaml-cpp/yaml.h>
+#ifndef SDL_FRAMEWORK
 #include <SDL_endian.h>
+#else
+#include <SDL/SDL_endian.h>
+#endif
 #include <fstream>
 #include <sstream>
 #include <iomanip>

@@ -23,7 +23,11 @@
 #include "../Mod/MapData.h"
 #include "BattleUnit.h"
 
+#ifndef SDL_FRAMEWORK
 #include <SDL_types.h> // for Uint8
+#else
+#include <SDL/SDL_types.h> // for Uint8
+#endif
 
 namespace OpenXcom
 {

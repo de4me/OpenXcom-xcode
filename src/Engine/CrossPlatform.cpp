@@ -61,7 +61,11 @@
 #include <iostream>
 #include <fstream>
 #include <locale>
+#ifndef SDL_FRAMEWORK
 #include <SDL_image.h>
+#else
+#include <SDL_image/SDL_image.h>
+#endif
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
@@ -74,8 +78,13 @@
 #include <dlfcn.h>
 #include "Unicode.h"
 #endif
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
 #include <SDL_syswm.h>
+#else
+#include <SDL/SDL.h>
+#include <SDL/SDL_syswm.h>
+#endif
 #ifdef __HAIKU__
 #include <FindDirectory.h>
 #include <StorageDefs.h>

@@ -19,7 +19,11 @@
  */
 #include <vector>
 #include <string>
+#ifndef SDL_FRAMEWORK
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include "../Savegame/Soldier.h"
 #include "LocalizedText.h"
 

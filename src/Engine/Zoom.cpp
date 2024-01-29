@@ -676,7 +676,12 @@ void Zoom::flipWithZoom(SDL_Surface *src, SDL_Surface *dst, int topBlackBand, in
 		{
 			SDL_BlitSurface(src, 0, glOut->buffer_surface->getSurface(), 0); // TODO; this is less than ideal...
 
-			glOut->refresh(glOut->linear, glOut->iwidth, glOut->iheight, dst->w, dst->h, topBlackBand, bottomBlackBand, leftBlackBand, rightBlackBand);
+#ifdef __APPLE__
+            double backing_scale = dst->backing_scale_factor;
+#else
+            double backing_scale = 1;
+#endif
+            glOut->refresh(glOut->linear, glOut->iwidth, glOut->iheight, dst->w, dst->h, topBlackBand, bottomBlackBand, leftBlackBand, rightBlackBand, backing_scale);
 			SDL_GL_SwapBuffers();
 		}
 #endif

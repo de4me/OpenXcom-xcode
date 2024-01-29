@@ -152,7 +152,7 @@ void OpenGL::clear() {
 	glErrorCheck();
 }
 
-void OpenGL::refresh(bool smooth, unsigned inwidth, unsigned inheight, unsigned outwidth, unsigned outheight, int topBlackBand, int bottomBlackBand, int leftBlackBand, int rightBlackBand)
+void OpenGL::refresh(bool smooth, unsigned inwidth, unsigned inheight, unsigned outwidth, unsigned outheight, int topBlackBand, int bottomBlackBand, int leftBlackBand, int rightBlackBand, double backingScaleFactor)
 {
 	while (glGetError() != GL_NO_ERROR); // clear possible error from who knows where
 	clear();
@@ -186,7 +186,7 @@ void OpenGL::refresh(bool smooth, unsigned inwidth, unsigned inheight, unsigned 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, outwidth, 0, outheight, -1.0, 1.0);
-	glViewport(0, 0, outwidth, outheight);
+    glViewport(0, 0, outwidth * backingScaleFactor, outheight * backingScaleFactor);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

@@ -79,4 +79,5 @@ nbproject/
 /makefile
 #Xcode project directory
 !/Xcode/OpenXcom
+!/Xcode/OpenXcom/OpenXcom
 **/xcuserdata/

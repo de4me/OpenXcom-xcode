@@ -78,6 +78,5 @@ translations/
 nbproject/
 /makefile
 #Xcode project directory
-!/Xcode/OpenXcom
-!/Xcode/OpenXcom/OpenXcom
+!Xcode/OpenXcom
 **/xcuserdata/

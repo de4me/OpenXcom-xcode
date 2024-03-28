@@ -371,6 +371,11 @@ void loadArgs(int argc, char *argv[])
 		std::string arg = argv[i];
 		if ((arg[0] == '-' || arg[0] == '/') && arg.length() > 1)
 		{
+			if (arg == "--")
+			{
+				break;
+			}
+
 			std::string argname;
 			if (arg[1] == '-' && arg.length() > 2)
 				argname = arg.substr(2, arg.length()-1);
@@ -419,7 +424,7 @@ void loadArgs(int argc, char *argv[])
 bool showHelp(int argc, char *argv[])
 {
 	std::ostringstream help;
-	help << "OpenXcom v" << OPENXCOM_VERSION_SHORT << std::endl;
+	help << "OpenXcom " << OPENXCOM_VERSION_SHORT << std::endl;
 	help << "Usage: openxcom [OPTION]..." << std::endl << std::endl;
 	help << "-data PATH" << std::endl;
 	help << "        use PATH as the default Data Folder instead of auto-detecting" << std::endl << std::endl;
@@ -431,6 +436,8 @@ bool showHelp(int argc, char *argv[])
 	help << "        set MOD to the current master mod (eg. -master xcom2)" << std::endl << std::endl;
 	help << "-KEY VALUE" << std::endl;
 	help << "        override option KEY with VALUE (eg. -displayWidth 640)" << std::endl << std::endl;
+	help << "-version" << std::endl;
+	help << "        show version number" << std::endl << std::endl;
 	help << "-help" << std::endl;
 	help << "-?" << std::endl;
 	help << "        show command-line help" << std::endl;
@@ -439,6 +446,11 @@ bool showHelp(int argc, char *argv[])
 		std::string arg = argv[i];
 		if ((arg[0] == '-' || arg[0] == '/') && arg.length() > 1)
 		{
+			if (arg == "--")
+			{
+				break;
+			}
+
 			std::string argname;
 			if (arg[1] == '-' && arg.length() > 2)
 				argname = arg.substr(2, arg.length()-1);
@@ -450,6 +462,19 @@ bool showHelp(int argc, char *argv[])
 				std::cout << help.str();
 				return true;
 			}
+			if (argname == "version")
+			{
+				std::cout << OPENXCOM_VERSION_SHORT << OPENXCOM_VERSION_GIT << std::endl;
+				return true;
+			}
+
+			// skip next option argument, only couple options do not have it.
+			++i;
+		}
+		else
+		{
+			std::cerr << "Unknown parameter '" << arg << "'" << std::endl;
+			return true;
 		}
 	}
 	return false;

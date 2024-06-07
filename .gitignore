@@ -80,3 +80,4 @@ nbproject/
 #Xcode project directory
 !Xcode/OpenXcom
 **/xcuserdata/
+Package.resolved

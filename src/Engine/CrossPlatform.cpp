@@ -182,7 +182,10 @@ std::vector<std::string> findDataFolders()
 		PathAppendA(path, "OpenXcom\\");
 		list.push_back(path);
 	}
-
+#ifdef DATADIR
+	snprintf(path, MAX_PATH, "%s\\", DATADIR);
+	list.push_back(path);
+#endif
 	// Get binary directory
 	if (GetModuleFileNameA(NULL, path, MAX_PATH) != 0)
 	{
@@ -206,7 +209,8 @@ std::vector<std::string> findDataFolders()
 	char path[MAXPATHLEN];
 
 	// Get user-specific data folders
-	if (char const *const xdg_data_home = getenv("XDG_DATA_HOME"))
+	char const *const xdg_data_home = getenv("XDG_DATA_HOME");
+	if (xdg_data_home && *xdg_data_home)
  	{
 		snprintf(path, MAXPATHLEN, "%s/openxcom/", xdg_data_home);
  	}
@@ -219,9 +223,13 @@ std::vector<std::string> findDataFolders()
 #endif
  	}
  	list.push_back(path);
-
+#ifdef DATADIR
+	snprintp(path, MAXPATHLEN, "%s/" DATADIR);
+	list.push_back(path);
+#endif
 	// Get global data folders
-	if (char const *const xdg_data_dirs = getenv("XDG_DATA_DIRS"))
+	char const *const xdg_data_dirs = getenv("XDG_DATA_DIRS");
+	if (xdg_data_dirs && *xdg_data_dirs)
 	{
 		char xdg_data_dirs_copy[strlen(xdg_data_dirs)+1];
 		strcpy(xdg_data_dirs_copy, xdg_data_dirs);
@@ -233,16 +241,18 @@ std::vector<std::string> findDataFolders()
 			dir = strtok(0, ":");
 		}
 	}
+	else
+	{
 #ifdef __APPLE__
-	list.push_back("/Users/Shared/OpenXcom/");
+		list.push_back("/Users/Shared/OpenXcom/");
 #else
-	list.push_back("/usr/local/share/openxcom/");
-	list.push_back("/usr/share/openxcom/");
-#ifdef DATADIR
-	snprintf(path, MAXPATHLEN, "%s/", DATADIR);
-	list.push_back(path);
+		list.push_back("/usr/local/share/openxcom/");
+		list.push_back("/usr/share/openxcom/");
 #endif
-
+	}
+#ifdef INSTALLDIR
+	snprintf(path, MAXPATHLEN, "%s", INSTALLDIR);
+	list.push_back(path);
 #endif
 
 #ifdef __linux
@@ -257,6 +267,7 @@ std::vector<std::string> findDataFolders()
 			if (dir_pos != std::string::npos) {
 				std::string dir = exe_path.substr(0, dir_pos);
 				list.push_back( dir.append("/") );
+				list.push_back( dir.append("/../share/openxcom/") ); // Relative FHS
 			}
 		}
 	}
@@ -406,7 +417,7 @@ std::string searchDataFile(const std::string &filename)
 	return filename;
 }
 
-std::string searchDataFolder(const std::string &foldername)
+std::string searchDataFolder(const std::string &foldername, int size)
 {
 	// Correct folder separator
 	std::string name = foldername;
@@ -416,7 +427,7 @@ std::string searchDataFolder(const std::string &foldername)
 
 	// Check current data path
 	std::string path = Options::getDataFolder() + name;
-	if (folderExists(path))
+	if (folderMinSize(path, size))
 	{
 		return path;
 	}
@@ -425,7 +436,7 @@ std::string searchDataFolder(const std::string &foldername)
 	for (std::vector<std::string>::const_iterator i = Options::getDataList().begin(); i != Options::getDataList().end(); ++i)
 	{
 		path = *i + name;
-		if (folderExists(path))
+		if (folderMinSize(path, size))
 		{
 			Options::setDataFolder(*i);
 			return path;
@@ -515,6 +526,57 @@ std::vector<std::string> getFolderContents(const std::string &path, const std::s
 	closedir(dp);
 	std::sort(files.begin(), files.end());
 	return files;
+}
+
+/**
+ * Gets the contents of a folder and checks
+ * if they meet a required minimum size.
+ * @param path Full path to folder.
+ * @param size Size of the folder (number of contents).
+ * @return False if the folder doesn't exist or doesn't meet the size.
+ */
+bool folderMinSize(const std::string &path, int size)
+{
+	if (!folderExists(path))
+	{
+		return false;
+	}
+	if (size == 0)
+	{
+		return true;
+	}
+
+	DIR *dp = opendir(path.c_str());
+	if (dp == 0)
+	{
+	#ifdef __MORPHOS__
+		return files;
+	#else
+		std::string errorMessage("Failed to open directory: " + path);
+		throw Exception(errorMessage);
+	#endif
+	}
+
+	int num = 0;
+	struct dirent *dirp;
+	while ((dirp = readdir(dp)) != 0)
+	{
+		std::string file = dirp->d_name;
+
+		if (!file.empty() && file[0] == '.')
+		{
+			//skip ".", "..", ".git", ".svn", ".bashrc", ".ssh" etc.
+			continue;
+		}
+
+		num++;
+		if (num >= size)
+		{
+			break;
+		}
+	}
+	closedir(dp);
+	return (num >= size);
 }
 
 /**

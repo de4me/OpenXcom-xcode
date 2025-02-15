@@ -2364,7 +2364,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					BDECF8802AC5942800830316 = {
 						CreatedOnToolsVersion = 12.4;
@@ -3023,13 +3023,14 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenXcom/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OpenXcom;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.openxcom.OpenXcom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3049,13 +3050,14 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenXcom/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OpenXcom;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.openxcom.OpenXcom;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -3023,7 +3023,6 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenXcom/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OpenXcom;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3050,7 +3049,6 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenXcom/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OpenXcom;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (

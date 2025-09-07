@@ -44,7 +44,7 @@ Thumbs.db
 *.log
 *.tlog
 *.zip
-[Dd]ebug*/
+[Dd]ebug/
 *.lib
 *.sbr
 [Rr]elease*/
@@ -77,6 +77,11 @@ translations/
 #Ignore NetBeans project directory
 nbproject/
 /makefile
+src/OpenXcom.2010.VC.opendb
+bin/Win32/user*
+bin/user
+/.kdev4/
+/*.kdev4
 #Xcode project directory
 !Xcode/OpenXcom
 **/xcuserdata/

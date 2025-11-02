@@ -32,11 +32,8 @@ namespace OpenXcom
  * Represents a 32-bit Unicode codepoint.
  * Not technically a character, but close enough for our purposes.
  */
-#ifdef __APPLE__
-typedef char32_t UCode;
-#else
 typedef Uint32 UCode;
-#endif
+
 /**
  * Represents a string where each character
  * is a Unicode codepoint. Used for rendering text.

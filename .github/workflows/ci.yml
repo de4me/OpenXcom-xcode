@@ -29,10 +29,10 @@ jobs:
 
           - name: macOS
             os: macOS-latest
-            packages: yaml-cpp sdl sdl_gfx $(pwd)/scripts/Formula/sdl_image.rb $(pwd)/scripts/Formula/sdl_mixer.rb
+            app-bundle: openxcom.app
+            cmake-args: -DCMAKE_PREFIX_PATH=/opt/local
             compiler: clang
             cpp-compiler: clang++
-            app-bundle: openxcom.app  # all other builds default to bin/
 
     runs-on: ${{ matrix.os }}
 
@@ -55,10 +55,14 @@ jobs:
 
       - name: Install packages (macOS)
         if: runner.os == 'macOS'
-        env:
-          HOMEBREW_NO_INSTALL_FROM_API: 1
-        run: |
-          brew install ccache ${{ matrix.packages }}
+        uses: melusina-org/setup-macports@v1
+        id: macports
+        with:
+          parameters: scripts/macports-config.yml
+      
+      - name: Install ccache (macOS)
+        if: runner.os == 'macOS'
+        run: brew install ccache
 
       - name: Setup Cache
         if: runner.os == 'Linux' || runner.os == 'macOS'
@@ -75,19 +79,6 @@ jobs:
             echo "MAYBE_SUDO=sudo" >> $GITHUB_ENV
           fi
           echo "CMAKE_BUILD_PARALLEL_LEVEL=`getconf _NPROCESSORS_ONLN 2>/dev/null || getconf NPROCESSORS_ONLN 2>/dev/null || echo 2`" >> $GITHUB_ENV
-
-      - name: Bypass Cloudflare for GitHub Action
-        uses: xiaotianxt/bypass-cloudflare-for-github-action@v1.1.1
-        with:
-          cf_zone_id: ${{ secrets.CF_ZONE_ID }}
-          cf_api_token: ${{ secrets.CF_API_TOKEN }}
-
-      - name: Download dependencies (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          Invoke-WebRequest -Uri "https://openxcom.org/download/dev/openxcom-deps-win-vc2017.zip" -OutFile "openxcom-deps-win-vc2017-newest.zip"
-          Expand-Archive -Path "openxcom-deps-win-vc2017-newest.zip"
-          Copy-Item -Recurse -Path "openxcom-deps-win-vc2017-newest\deps\*" -Destination "deps"
 
       - name: Generate project files
         run: |

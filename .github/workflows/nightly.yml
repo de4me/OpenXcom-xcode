@@ -124,20 +124,6 @@ jobs:
           name: ${{ env.FILENAME }}_windows
           path: artifacts/*
 
-      - name: Deploy artifacts
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
-        env:
-          SSH_SERVER: ${{ secrets.SSH_SERVER }}
-        if: ${{ env.SSH_SERVER }}
-        with:
-          username: ${{ secrets.SSH_USERNAME }}
-          server: ${{ secrets.SSH_SERVER }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          local_path: './artifacts/*'
-          remote_path: ${{ secrets.SSH_REMOTE }}
-          sftpArgs: '-o ConnectTimeout=5'
-
   linux:
     name: Linux
     runs-on: ubuntu-22.04
@@ -219,20 +205,6 @@ jobs:
           name: ${{ env.FILENAME }}_linux
           path: artifacts/*
 
-      - name: Deploy artifacts
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
-        env:
-          SSH_SERVER: ${{ secrets.SSH_SERVER }}
-        if: ${{ env.SSH_SERVER }}
-        with:
-          username: ${{ secrets.SSH_USERNAME }}
-          server: ${{ secrets.SSH_SERVER }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          local_path: './artifacts/*'
-          remote_path: ${{ secrets.SSH_REMOTE }}
-          sftpArgs: '-o ConnectTimeout=5'
-
   macos:
     name: macOS
     runs-on: macos-latest
@@ -311,17 +283,3 @@ jobs:
         with:
           name: ${{ env.FILENAME }}_macos
           path: artifacts/*
-
-      - name: Deploy artifacts
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
-        env:
-          SSH_SERVER: ${{ secrets.SSH_SERVER }}
-        if: ${{ env.SSH_SERVER }}
-        with:
-          username: ${{ secrets.SSH_USERNAME }}
-          server: ${{ secrets.SSH_SERVER }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          local_path: './artifacts/*'
-          remote_path: ${{ secrets.SSH_REMOTE }}
-          sftpArgs: '-o ConnectTimeout=5'

@@ -238,22 +238,27 @@ void UnitFallBState::think()
 			{
 				Position offset;
 				Pathfinding::directionToVector(dir, &offset);
-
+				Position destination = unitBelow->getPosition() + offset;
+				if (_parent->getSave()->getPathfinding()->getTUCost(unitBelow->getPosition(), dir, &destination, unitBelow, 0, false) == 255)
+				{
+					// can't move this way, try another direction
+					continue;
+				}
 				for (std::vector<Position>::iterator bs = bodySections.begin(); bs < bodySections.end(); )
 				{
 					Position originalPosition = (*bs);
 					Position endPosition = originalPosition + offset;
+
 					Tile *t = _parent->getSave()->getTile(endPosition);
 					Tile *bt = _parent->getSave()->getTile(endPosition + Position(0,0,-1));
 
 					bool aboutToBeOccupiedFromAbove = t && std::find(tilesToFallInto.begin(), tilesToFallInto.end(), t) != tilesToFallInto.end();
 					bool alreadyTaken = t && std::find(escapeTiles.begin(), escapeTiles.end(), t) != escapeTiles.end();
 					bool alreadyOccupied = t && t->getUnit() && (t->getUnit() != unitBelow);
-					bool movementBlocked = _parent->getSave()->getPathfinding()->getTUCost(originalPosition, dir, &endPosition, *ub, 0, false) == 255;
 					bool hasFloor = t && !t->hasNoFloor(bt);
 					bool unitCanFly = unitBelow->getMovementType() == MT_FLY;
 
-					bool canMoveToTile = t && !alreadyOccupied && !alreadyTaken && !aboutToBeOccupiedFromAbove && !movementBlocked && (hasFloor || unitCanFly);
+					bool canMoveToTile = t && !alreadyOccupied && !alreadyTaken && !aboutToBeOccupiedFromAbove && (hasFloor || unitCanFly);
 					if (canMoveToTile)
 					{
 						// Check next section of the unit.
@@ -291,7 +296,7 @@ void UnitFallBState::think()
 			}
 			if (!escapeFound)
 			{
-				// STOMP THAT GOOMBAH!
+				// STOMP THAT GOOMBA!
 				unitBelow->knockOut(_parent);
 				ub = unitsToMove.erase(ub);
 			}

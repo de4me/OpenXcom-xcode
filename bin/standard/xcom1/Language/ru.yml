@@ -680,7 +680,7 @@ ru:
   STR_RATING: "РЕЙТИНГ> {0}"
   STR_RATING_TERRIBLE: "УЖАСНО!"
   STR_RATING_POOR: "ПЛОХО!"
-  STR_RATING_OK: "ОК"
+  STR_RATING_OK: "НОРМАЛЬНО"
   STR_RATING_GOOD: "ХОРОШО!"
   STR_RATING_EXCELLENT: "ПРЕВОСХОДНО!"
   STR_SCORE: "СЧЕТ"

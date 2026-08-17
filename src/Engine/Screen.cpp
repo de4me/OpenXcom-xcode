@@ -306,6 +306,19 @@ int Screen::getHeight() const
 }
 
 /**
+ * Returns the screen's backing scale factor
+ * @return Backing scale factor
+ */
+double Screen::getBackingScaleFactor() const
+{
+#ifdef __APPLE__
+	return _screen->backing_scale_factor;
+#else
+	return 1.0;
+#endif
+}
+
+/**
  * Resets the screen surfaces based on the current display options,
  * as they don't automatically take effect.
  * @param resetVideo Reset display surface.

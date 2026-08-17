@@ -84,6 +84,8 @@ public:
 	int getWidth() const;
 	/// Gets the screen's height.
 	int getHeight() const;
+	/// Gets the screen's backing scale factor
+	double getBackingScaleFactor() const;
 	/// Resets the screen display.
 	void resetDisplay(bool resetVideo = true);
 	/// Gets the screen's X scale.

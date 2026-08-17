@@ -533,16 +533,18 @@ int Screen::getCursorLeftBlackBand() const
  */
 void Screen::screenshot(const std::string &filename) const
 {
-	SDL_Surface *screenshot = SDL_AllocSurface(0, getWidth() - getWidth()%4, getHeight(), 24, 0xff, 0xff00, 0xff0000, 0);
+	int width = getWidth() * getBackingScaleFactor();
+	int height = getHeight() * getBackingScaleFactor();
+	SDL_Surface *screenshot = SDL_AllocSurface(0, width - width%4, height, 24, 0xff, 0xff00, 0xff0000, 0);
 
 	if (useOpenGL())
 	{
 #ifndef __NO_OPENGL
 		GLenum format = GL_RGB;
 
-		for (int y = 0; y < getHeight(); ++y)
+		for (int y = 0; y < height; ++y)
 		{
-			glReadPixels(0, getHeight()-(y+1), getWidth() - getWidth()%4, 1, format, GL_UNSIGNED_BYTE, ((Uint8*)screenshot->pixels) + y*screenshot->pitch);
+			glReadPixels(0, height-(y+1), width - width%4, 1, format, GL_UNSIGNED_BYTE, ((Uint8*)screenshot->pixels) + y*screenshot->pitch);
 		}
 		glErrorCheck();
 #endif
@@ -552,7 +554,7 @@ void Screen::screenshot(const std::string &filename) const
 		SDL_BlitSurface(_screen, 0, screenshot, 0);
 	}
 
-	unsigned error = lodepng::encode(filename, (const unsigned char *)(screenshot->pixels), getWidth() - getWidth()%4, getHeight(), LCT_RGB);
+	unsigned error = lodepng::encode(filename, (const unsigned char *)(screenshot->pixels), width - width%4, height, LCT_RGB);
 	if (error)
 	{
 		Log(LOG_ERROR) << "Saving to PNG failed: " << lodepng_error_text(error);

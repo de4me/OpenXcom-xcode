@@ -92,7 +92,7 @@ ru:
     many: "{N} часов"
     other: "{N} часов"
   STR_MAINTENANCE_UC: "ОБСЛУЖИВАНИЕ>"
-  STR_OK: "ОК"
+  STR_OK: "Хорошо"
   STR_INSTALLATION: "Строить:"
   STR_CURRENT_RESEARCH: "ТЕКУЩИЕ ИССЛЕДОВАНИЯ"
   STR_SCIENTISTS_AVAILABLE: "Ученых доступно>{ALT}{0}"
